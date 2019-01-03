@@ -1,0 +1,62 @@
+﻿@model WebApplication6.Models.IHD_CO_SEARCH_VIEW
+@{
+    Layout = null;
+}
+<style>
+    .b21 {
+        margin-top: -12%;
+        margin-left: 88%;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        color: #ffffff;
+    }
+
+    .b11 {
+        color: #ffffff;
+        margin-top: 4px;
+        margin-left: 70%;
+        background-color: #5cb85c;
+        border-color: #5cb85c;
+        width: 16%;
+    }
+</style>
+<!DOCTYPE html>
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+@using (Html.BeginForm("Add", "Dashboard", FormMethod.Post))
+{
+    <div class="form-group" style="margin-top:6%;">
+        <!--DROPDOWN FOR Requirement NAME-->
+        @*<label class="control-label" style="color: black;font-size: 16px;text-transform: capitalize;font-weight: 600;">Notes</label>*@
+        @*@Html.TextAreaFor(model => model.Comments, 3, 45, new { htmlAttributes = new { @class = "form-control", @style = "width:80%;display:block;", required = "required" } })*@
+        @Html.TextAreaFor(model => model.Comments, new { @id = "text", @class = "form-control", required = "required" })
+        <script>
+            CKEDITOR.replace("text", {
+                height: 140,
+                width: 520
+            });
+        </script>
+        @Html.Hidden("clid", (long)ViewBag.value)
+        <div class="form-group">
+            <button type="submit" id="add" class="btn b11 footer">
+                <i class="glyphicon glyphicon-plus"></i> Add
+            </button>
+            <button type="button" class="btn b21 footer" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i>Cancel</button>
+        </div>
+    </div>
+}
+@*<script>
+    $(document).ready(function() {
+        // create DatePicker from input HTML element
+        //$("#add").onclick.({
+        //    $.ajax({
+        //        type: "GET",
+        //        url: "/Dashboard/Notes",
+        //        contentType: "application/json ",
+        //        data: { clid: Rid },
+        //        success: function (data1) {}
+        //    });
+        
+    });
+ 
+</script>*@
+

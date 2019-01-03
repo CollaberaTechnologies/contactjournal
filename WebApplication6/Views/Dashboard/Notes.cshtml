@@ -1,0 +1,122 @@
+﻿@model WebApplication6.Models.IHD_CO_SEARCH_VIEW
+@{
+    Layout = null;
+}
+<style>
+        .b1 {
+            color: #ffffff;
+            margin-top: 25px;
+            /*margin-left: 25px;*/
+            background-color: #5cb85c;
+            border-color: #5cb85c;
+        }
+
+        .b2 {
+            margin-top: 5%;
+            margin-left: 90%;
+            background-color: #d9534f;
+            border-color: #d43f3a;
+            color: #ffffff;
+        }
+
+        /*table{
+         border-collapse: collapse;
+        border-spacing: 0;
+        /*width: 100%;
+        border: 1px solid #ddd;
+    }*/
+        th, td {
+            text-align: left;
+            padding: 4px;
+        }
+
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #customers tr:hover {
+                background-color: powderblue;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: skyBlue;
+                color: black;
+            }
+
+        .inner_table {
+            height: 450px;
+            overflow-y: auto;
+        }
+
+        .wrap {
+            width: 100%;
+        }
+
+        table.head tr td {
+            background: #eee;
+        }
+
+        .wrap table {
+            width: 100%;
+            table-layout: fixed;
+        }
+</style>
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+@*<script src="~/Content/ckeditor/autogrow/plugin.js"></script>*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @*<button type="submit" class="close" aria-hidden="true">×</button>*@
+    <div class="inner_table">
+
+
+        @foreach (var item in ViewBag.value)
+        {
+            <table class="table table-responsive" style="border: 2px solid black;">
+                <tr>
+
+                    <td><b>User Name:</b>@item.Name</td>
+                    <td><b>Time:</b>@item.Date</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <b>Notes:</b><textarea name="" id="@item.Rid" @*cols="60" rows="10"*@ readonly="readonly">@item.Comments</textarea>
+                        <script>
+                            CKEDITOR.replace("@item.Rid", {
+                                //extraPlugins: 'autogrow',
+                                //autoGrow_maxHeight: 1500,
+                                //autoGrow_minHeight : 10,
+                                width: 880,
+                            });
+                        </script>
+                    </td>
+                </tr>
+            </table>
+        }
+
+    </div>
+    @*<div class="form-group" style="margin-top:6%;">
+
+            <label class="control-label" style="color: black;font-size: 16px;text-transform: capitalize;font-weight: 600;">Add Notes</label>
+            @Html.TextAreaFor(model => model.Comments, 3, 45, new { htmlAttributes = new { @class = "form-control", @style = "width:80%;", required = "required" } })
+            <button type="submit" class="btn b1" data-dismiss="modal">Add</button>
+        </div>*@
+    <div>
+        <button type="button" class="btn b2 footer" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i>Close</button>
+    </div>
+}
+
